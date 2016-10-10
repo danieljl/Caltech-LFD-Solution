@@ -28,7 +28,7 @@ def run_experiment(N):
     return num_iterations, p_f_neq_g
 
 
-def calculate_p_f_neq_g(f, g, points=None):
+def calculate_p_f_neq_g(f, g, points=None, num_points=None):
     """
     Calculate the probability P(f(x) != g(x)) using Monte Carlo method.
     `f` and `g` are 3-element arrays [w0, w1, w2] representing a line:
@@ -37,7 +37,7 @@ def calculate_p_f_neq_g(f, g, points=None):
     generated randomly.
     """
     if points is None:
-        points = random_points(MONTE_CARLO_NUM_POINTS)
+        points = random_points(num_points or MONTE_CARLO_NUM_POINTS)
     label_f = label_points(points, f)
     label_g = label_points(points, g)
     return np.mean(~np.isclose(label_f, label_g))
