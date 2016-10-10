@@ -43,8 +43,8 @@ def calculate_p_f_neq_g(f, g, points=None, num_points=None):
     return np.mean(~np.isclose(label_f, label_g))
 
 
-def perceptron_learning(points, correct_labels):
-    w = np.zeros(3)
+def perceptron_learning(points, correct_labels, w_init=None):
+    w = np.zeros(3) if w_init is None else w_init
     for num_iterations in count(start=0, step=1):
         pred_labels = label_points(points, w)
         miss_condition = ~np.isclose(pred_labels, correct_labels)
